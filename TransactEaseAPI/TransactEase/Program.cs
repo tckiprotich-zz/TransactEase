@@ -1,11 +1,20 @@
+// stripe-dotnet nuget package
+using Stripe;
+using TransactEase.Application;
+using TransactEase.Models;
+using TransactEase;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Add Stripe Infrastructure
+builder.Services.AddStripeInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
@@ -23,3 +32,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

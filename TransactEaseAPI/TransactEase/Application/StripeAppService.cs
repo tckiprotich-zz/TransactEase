@@ -1,5 +1,6 @@
 global using TransactEase.Models.Stripe;
 global using TransactEase.Contracts;
+global using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,9 +72,30 @@ namespace TransactEase.Application
         /// <param name="payment">Stripe Payment</param>
         /// <param name="ct">Cancellation Token</param>
         /// <returns><Stripe Payment/returns>
-        public Task<StripePayment> AddStripePaymentAsync(AddStripePayment payment, CancellationToken ct)
-        {
-        	throw new NotImplementedException();
-        }
+        public async Task <StripePayment> AddStripePaymentAsync(AddStripePayment payment, CancellationToken ct) 
+{
+    // Set the options for the payment we would like to create at Stripe
+    ChargeCreateOptions paymentOptions = new ChargeCreateOptions {
+        Customer = payment.CustomerId,
+        ReceiptEmail = payment.ReceiptEmail,
+        Description = payment.Description,
+        Currency = payment.Currency,
+        Amount = payment.Amount
+    };
+
+    // Create the payment
+    var createdPayment = await _chargeService.CreateAsync(paymentOptions, null, ct);
+
+    // Return the payment to requesting method
+    return new StripePayment(
+      createdPayment.CustomerId,
+      createdPayment.ReceiptEmail,
+      createdPayment.Description,
+      createdPayment.Currency,
+      createdPayment.Amount,
+      createdPayment.Id);
+}
+
+
     }
 }
