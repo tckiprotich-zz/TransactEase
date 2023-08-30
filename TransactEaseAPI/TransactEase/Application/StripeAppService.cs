@@ -23,13 +23,6 @@ namespace TransactEase.Application
             _customerService = customerService;
             _tokenService = tokenService;
 		}
-
-        /// <summary>
-        /// Create a new customer at Stripe through API using customer and card details from records.
-        /// </summary>
-        /// <param name="customer">Stripe Customer</param>
-        /// <param name="ct">Cancellation Token</param>
-        /// <returns>Stripe Customer</returns>
         public async Task<StripeCustomer> AddStripeCustomerAsync(AddStripeCustomer customer, CancellationToken ct)
 {
     // Set Stripe Token options based on customer data
@@ -47,8 +40,9 @@ namespace TransactEase.Application
 
     // Create new Stripe Token
     Token stripeToken = await _tokenService.CreateAsync(tokenOptions, null, ct);
+    Console.WriteLine(stripeToken.Id);
 
-    // Set Customer options using
+    // Set Customer options using the token
     CustomerCreateOptions customerOptions = new CustomerCreateOptions
     {
         Name = customer.Name,

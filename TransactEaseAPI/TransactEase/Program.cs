@@ -16,6 +16,8 @@ builder.Services.AddSwaggerGen();
 // Add Stripe Infrastructure
 builder.Services.AddStripeInfrastructure(builder.Configuration);
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,6 +26,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
 
 app.UseHttpsRedirection();
 
