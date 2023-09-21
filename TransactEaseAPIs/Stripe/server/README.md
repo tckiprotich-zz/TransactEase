@@ -20,5 +20,4 @@ Feel free to copy `.env.example` from the root and fill in the missing values.
 dotnet run
 ```
 
-4. If you're using the html client, go to `localhost:4242` to see the demo. For
-   react, visit `localhost:3000`.
+
