@@ -46,7 +46,7 @@ export STATIC_DIR=your_static_directory
 Replace your_publishable_key, your_secret_key, your_webhook_secret, your_domain, and your_static_directory with your actual values from [Stripe Account](https://stripe.com).
 
 ## Usage
-Cd into the ```Server directory ```
+Cd into the ```Server ``` directory
 ```shell
 dotnet run
 
@@ -56,7 +56,7 @@ dotnet run
 - POST /create-payment-intent: Create a payment intent.
 - POST /webhook: Handle webhook events.
 
-  ## Webhooks
+## Webhooks
   This project includes code to handle Stripe webhook events. It listens for events and processes them based on the event type. You can customize the webhook handling logic as needed.
 
 ## Contributing
